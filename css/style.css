@@ -260,3 +260,42 @@ h1, h2, h3 {
 .btn-add-to-cart:hover {
     background-color: #333;
 }
+/* blog */
+
+    .post {
+      background: #fff;
+      padding: 16px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .post h2 {
+      margin: 0 0 8px;
+      color: #333;
+    }
+
+    .post h3 {
+      margin: 0 0 8px;
+      font-weight: normal;
+      color: #666;
+    }
+
+    .post .date {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 8px;
+    }
+
+    .post p {
+      margin: 0 0 8px;
+    }
+
+    .post a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .post a:hover {
+      text-decoration: underline;
+    }

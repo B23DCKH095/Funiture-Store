@@ -30,49 +30,84 @@
         </div>
     </header>
 
-    <main class="blog-page">
-        <div class="container">
-            <h1>Tin tức & Blog</h1>
-            <section class="blog-list">
-                <article class="blog-post">
-                    <a href="post1.html">
-                        <img src="images/blog-post1.jpg" alt="Mẹo trang trí phòng khách">
-                    </a>
-                    <div class="post-content">
-                        <h2><a href="post1.html">5 Mẹo nhỏ giúp phòng khách thêm ấm cúng</a></h2>
-                        <p class="post-meta">Ngày đăng: 28/08/2025</p>
-                        <p class="post-excerpt">Phòng khách là bộ mặt của ngôi nhà, là nơi sum họp gia đình và đón tiếp bạn bè. Dưới đây là 5 mẹo đơn giản nhưng hiệu quả để tạo nên một không gian ấm cúng và đầy phong cách...</p>
-                        <a href="post1.html" class="read-more">Đọc tiếp →</a>
-                    </div>
-                </article>
+    <body>
 
-                <article class="blog-post">
-                    <a href="post2.html">
-                        <img src="images/blog-post2.jpg" alt="Xu hướng nội thất 2025">
-                    </a>
-                    <div class="post-content">
-                        <h2><a href="post2.html">Điểm danh các xu hướng nội thất nổi bật năm 2025</a></h2>
-                        <p class="post-meta">Ngày đăng: 25/08/2025</p>
-                        <p class="post-excerpt">Mỗi năm, thế giới nội thất lại đón nhận những xu hướng mới mẻ, từ vật liệu thân thiện môi trường đến các gam màu độc đáo. Cùng khám phá những phong cách đang thịnh hành nhất...</p>
-                        <a href="post2.html" class="read-more">Đọc tiếp →</a>
-                    </div>
-                </article>
+<body>
 
-                <article class="blog-post">
-                    <a href="post3.html">
-                        <img src="images/blog-post3.jpg" alt="Cách chọn sofa phù hợp">
-                    </a>
-                    <div class="post-content">
-                        <h2><a href="post3.html">Hướng dẫn chọn sofa phù hợp cho căn hộ chung cư</a></h2>
-                        <p class="post-meta">Ngày đăng: 20/08/2025</p>
-                        <p class="post-excerpt">Sofa không chỉ là món đồ nội thất, mà còn là trái tim của phòng khách. Làm thế nào để chọn được chiếc sofa vừa vặn, tiện nghi và đẹp mắt cho không gian sống hiện đại?...</p>
-                        <a href="post3.html" class="read-more">Đọc tiếp →</a>
-                    </div>
-                </article>
+  <h1>Danh sách bài viết</h1>
+  <div id="postList">Đang tải bài viết...</div>
+  <div id="pagination"></div>
 
-                </section>
-        </div>
-    </main>
+  <script>
+    const POSTS_PER_PAGE = 10;
+    let currentPage = 1;
+    let postsData = [];
+
+    function renderPosts(page) {
+      const container = document.getElementById('postList');
+      container.innerHTML = ''; // Clear current content
+
+      const start = (page - 1) * POSTS_PER_PAGE;
+      const end = start + POSTS_PER_PAGE;
+      const pagePosts = postsData.slice(start, end);
+
+      pagePosts.forEach(post => {
+        const postDiv = document.createElement('div');
+        postDiv.className = 'post';
+        postDiv.innerHTML = `
+          <h2>${post.title}</h2>
+          <h3>${post.subtitle}</h3>
+          <div class="date">Ngày đăng: ${post.date}</div>
+          <p>${post.intro}</p>
+          <a href="${post.link}" target="_blank">Xem chi tiết</a>
+        `;
+        container.appendChild(postDiv);
+      });
+
+      renderPagination();
+    }
+
+    function renderPagination() {
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = '';
+
+      const totalPages = Math.ceil(postsData.length / POSTS_PER_PAGE);
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.style.margin = '4px';
+        btn.onclick = () => {
+          currentPage = i;
+          renderPosts(currentPage);
+        };
+
+        if (i === currentPage) {
+          btn.style.fontWeight = 'bold';
+          btn.disabled = true;
+        }
+
+        pagination.appendChild(btn);
+      }
+    }
+
+    fetch('data/blog.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Không thể tải JSON');
+        }
+        return response.json();
+      })
+      .then(data => {
+        postsData = data;
+        renderPosts(currentPage);
+      })
+      .catch(error => {
+        document.getElementById('postList').innerHTML = 'Lỗi tải dữ liệu: ' + error.message;
+      });
+  </script>
+
+</body>
 
     <footer class="footer">
         <div class="container">
