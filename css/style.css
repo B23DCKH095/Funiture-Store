@@ -188,17 +188,43 @@ h1, h2, h3 {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
-.product-item, .product-list{
+/*
+ * Định dạng cho thùng chứa (grid container)
+ * để sắp xếp các sản phẩm theo dạng lưới.
+ */
+.product-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Hiển thị 3 cột có kích thước bằng nhau khi màn hình đủ rộng */
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
-.product-list img{
+
+/*
+ * Định dạng cho từng sản phẩm (grid item).
+ */
+.product-item {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+}
+
+/*
+ * Định dạng hình ảnh sản phẩm bên trong .product-item.
+ */
+.product-item img {
     width: 100%;
+    height: auto; /* Dùng 'auto' để giữ tỉ lệ ảnh */
     border-radius: 10px;
     transition: transform 0.3s ease;
 }
-.product-list img:hover {
+
+/*
+ * Hiệu ứng phóng to khi di chuột vào hình ảnh.
+ */
+.product-item img:hover {
     transform: scale(1.05);
 }
 .category-item {
