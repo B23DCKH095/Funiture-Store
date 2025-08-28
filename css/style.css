@@ -188,7 +188,19 @@ h1, h2, h3 {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
-
+.product-item, .product-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+.product-list img{
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+.product-list img:hover {
+    transform: scale(1.05);
+}
 .category-item {
     text-align: center;
 }
